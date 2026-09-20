@@ -1,0 +1,195 @@
+name: M&A News Research Packet
+description: ChatGPT Scheduled Research から Multica へ渡す記事候補
+title: "[M&A NEWS] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <!-- ma-news-schema:v1 -->
+        1ニュース = 1 Issue。一次情報を優先し、後段agentが再調査しなくて済むResearch Packetを残してください。
+
+  - type: input
+    id: discovered_at
+    attributes:
+      label: Discovered At
+      description: 発見・確認日（YYYY-MM-DD）
+      placeholder: "2026-09-20"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Acquisition / 買収
+        - Business Transfer / 事業譲渡
+        - Capital Alliance / 資本業務提携
+        - MBO / TOB
+        - PE / Fund
+        - Divestiture / 売却
+        - Merger / 統合
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: buyer
+    attributes:
+      label: Buyer / Acquirer
+      placeholder: 買い手・出資側
+    validations:
+      required: true
+
+  - type: input
+    id: target
+    attributes:
+      label: Target / Seller
+      placeholder: 対象会社・事業・売り手
+    validations:
+      required: true
+
+  - type: textarea
+    id: primary_sources
+    attributes:
+      label: Primary Sources
+      description: IR、適時開示、公式発表など。URLと要点をセットで記載。
+      placeholder: |
+        - URL:
+          - 要点:
+        - URL:
+          - 要点:
+    validations:
+      required: true
+
+  - type: textarea
+    id: secondary_sources
+    attributes:
+      label: Secondary Sources
+      description: 報道・業界記事・補足情報。一次情報と混同しない。
+      placeholder: |
+        - URL:
+          - 要点:
+
+  - type: textarea
+    id: deal_summary
+    attributes:
+      label: Deal Summary
+      description: 取引概要。未開示は未開示と明記。
+      placeholder: |
+        - 発表日:
+        - スキーム:
+        - 取得比率:
+        - 取引金額:
+        - クロージング:
+        - アドバイザー:
+        - その他:
+    validations:
+      required: true
+
+  - type: textarea
+    id: company_research
+    attributes:
+      label: Company Research
+      description: Buyer / Target の事業、規模、沿革、収益源、周辺市場。
+      placeholder: |
+        ## Buyer
+        - 事業:
+        - 規模:
+        - 狙い（事実 / 会社説明）:
+
+        ## Target
+        - 事業:
+        - 規模:
+        - 強み:
+    validations:
+      required: true
+
+  - type: textarea
+    id: article_angle
+    attributes:
+      label: Article Angles
+      description: M&A Reviewで扱う論点候補。事実と仮説を分ける。
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: seo
+    attributes:
+      label: SEO / Search Signals
+      description: 想定クエリ、関連語、検索意図、競合記事。
+      placeholder: |
+        - Primary query:
+        - Secondary queries:
+        - Search intent:
+        - Competitors:
+        - Related existing pages:
+
+  - type: input
+    id: target_repo
+    attributes:
+      label: Target Repository
+      description: 実装・公開先repo
+      value: "ma-team333/growth-partnership"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 - 即日
+        - P1 - 高
+        - P2 - 通常
+        - P3 - 保留
+    validations:
+      required: true
+
+  - type: textarea
+    id: routing
+    attributes:
+      label: Agent Routing
+      value: |
+        research: ChatGPT
+        repo_scout: OMP
+        writer: Claude
+        alternative_analysis: AGY
+        implementation: Codex
+        image: Codex ImageGen
+        review: Claude
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow Status
+      value: |
+        status: research-ready
+
+        - [x] external research
+        - [x] primary-source check
+        - [ ] duplicate check against target repo
+        - [ ] repo scout
+        - [ ] article outline
+        - [ ] article draft
+        - [ ] alternative analysis
+        - [ ] hero / OGP image
+        - [ ] implementation
+        - [ ] build / test
+        - [ ] editorial review
+        - [ ] PR
+        - [ ] published
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / Risks
+      description: 不確実点、要確認事項、公開上の注意など。
